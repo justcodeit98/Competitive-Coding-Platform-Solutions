@@ -1,0 +1,56 @@
+//https://leetcode.com/problems/delete-nodes-and-return-forest/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+  
+    
+    public List<TreeNode> delNodes(TreeNode root, int[] to_delete)      {
+          List<TreeNode> list = new ArrayList<TreeNode>();
+    Set <Integer> set = new HashSet<Integer>();
+        for(int i:to_delete)
+        {
+            set.add(i);
+        }
+        dfs(root, set, list);
+        if(!set.contains(root.val))
+            list.add(root);
+        return list;
+    }
+    
+    public TreeNode dfs(TreeNode ptr, Set<Integer> set, List<TreeNode> list)
+    {
+        if(ptr==null)
+            return null;
+        
+        //traverse to the leftmost and rightmost nodes before bactracking
+        ptr.left=dfs(ptr.left, set, list);
+        ptr.right=dfs(ptr.right, set, list);
+        
+        if(set.contains(ptr.val))
+        {
+            if (ptr.left != null) 
+                list.add(ptr.left);
+            if (ptr.right != null) 
+                list.add(ptr.right);
+            return null;
+        }
+        
+        return ptr;
+        
+    }
+          
+}
