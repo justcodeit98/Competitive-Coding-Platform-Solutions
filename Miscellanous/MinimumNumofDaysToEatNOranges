@@ -1,0 +1,31 @@
+
+//https://leetcode.com/problems/minimum-number-of-days-to-eat-n-oranges/
+class Solution {
+    static HashMap<Integer,Integer> has=new HashMap<>();
+    static int maxx(int n){
+        if(n==0){
+            return 0;
+        }
+        if(has.get(n)!=null){return has.get(n);}
+        if(n%6==0){
+            int aa=Math.min(maxx(n/3)+1,maxx(n/2)+1);
+            has.put(n,aa);
+            return aa;
+        }else if(n%2==0){
+            int aa=Math.min(maxx(n/2)+1,maxx(n-1)+1);
+            has.put(n,aa);
+            return aa;
+        }else if(n%3==0){
+            int aa=Math.min(maxx(n/3)+1,maxx(n-1)+1);
+            has.put(n,aa);
+            return aa;
+        }else{
+            int aa=maxx(n-1)+1;
+            has.put(n,aa);
+            return aa;
+        }
+    }
+    public int minDays(int n) {
+        return maxx(n);
+    }
+}
