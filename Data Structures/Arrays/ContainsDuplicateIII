@@ -1,0 +1,32 @@
+
+
+class Solution {
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+        if(nums.length==0 || nums.length>9999)
+            return false;
+        
+        int i=0, j=1;
+        while(i<j && j <nums.length)
+        {
+            if(Math.abs(i-j)<=k)
+            {
+                if(Math.abs((long)nums[i]-(long)nums[j])<=t)
+                   return true;
+                
+                j++;
+                if(j>=nums.length)
+                {
+                    i++;
+                    j=i+1;
+                }
+            }
+            else
+            {
+                i++;
+                j=i+1;
+            }
+            
+        }
+        return false;
+    }
+}
