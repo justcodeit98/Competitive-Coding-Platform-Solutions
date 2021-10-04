@@ -1,0 +1,18 @@
+// https://leetcode.com/problems/count-sorted-vowel-strings/
+
+class Solution {
+    public int countVowelStrings(int n) {
+        int ac=1,ec=1,ic=1,oc=1,uc=1;
+        if (n==1)
+            return ac+ec+ic+oc+uc;
+        for (int x=1;x<n;x++){
+            ac=ac+ec+ic+oc+uc;
+            ec=ec+ic+oc+uc;
+            ic=ic+oc+uc;
+            oc=oc+uc;
+            uc=uc+0;
+        }
+        return ac+ec+ic+oc+uc;
+        
+    }
+}
