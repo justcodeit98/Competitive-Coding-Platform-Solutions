@@ -1,0 +1,45 @@
+//https://leetcode.com/problems/triangle/
+
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        for(int i=triangle.size()-2;i>=0;i--){
+            List<Integer> curr = triangle.get(i);
+            List<Integer> next = triangle.get(i+1);
+            for(int j =0; j<curr.size();j++){
+                curr.set(j, curr.get(j) + Math.min(next.get(j), next.get(j+1)));
+            }
+        }
+        return triangle.get(0).get(0);
+    }
+}
+
+/*class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        if(triangle.size()==1)
+            return triangle.get(0).get(0);
+        int sum=0, col=0;
+        for(int row=0; row<triangle.size(); row++)
+        {
+            if(row==0)
+                sum=sum+triangle.get(row).get(col);
+            else if(col<triangle.get(row).size())
+            
+            {
+                if(triangle.get(row).get(col)>triangle.get(row).get(col+1))
+                {
+                    
+                    col++;
+                    sum=sum+triangle.get(row).get(col);
+                }
+                else
+                    sum=sum+triangle.get(row).get(col);
+            }
+            else
+            {
+                sum=sum+triangle.get(row).get(col);
+            }
+        }
+        return sum;
+        
+    }
+}*/
