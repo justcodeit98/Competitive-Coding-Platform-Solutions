@@ -1,0 +1,17 @@
+//https://leetcode.com/problems/bulb-switcher-iii/
+
+class Solution {
+    public int numTimesAllBlue(int[] light) {
+        int timesblue = 0, rightmost = 0;
+        
+        
+        for(int i = 0; i<light.length; i++)
+        {
+            rightmost = Math.max(rightmost, light[i]);
+            if(rightmost==i+1)
+                timesblue++;
+        }
+        return timesblue;
+        
+    }
+}
