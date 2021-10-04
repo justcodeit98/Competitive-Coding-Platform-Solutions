@@ -1,0 +1,37 @@
+//https://leetcode.com/problems/find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k/
+
+class Solution {
+    public int findMinFibonacciNumbers(int k) {
+        if(k==1)
+            return 1;
+        int a= 1;
+        int b = 1;
+        List<Integer> fib = new ArrayList<Integer>();
+        fib.add(a);
+        fib.add(b);
+        
+        for(int i=2; b<k; i++ )
+        {
+            int c = a+b;
+            fib.add(c);
+            a = b;
+            b = c;
+            
+        }
+        int count = 0;
+        int i=fib.size()-1;
+        while(k!=0 && i>=0)
+        {
+            if(fib.get(i)>k)
+            {
+                i--;
+            }
+            else
+            {
+                 k=k-fib.get(i);
+                count++;
+            }   
+        }
+        return count;
+    }
+}
